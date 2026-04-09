@@ -6,7 +6,7 @@ export function App() {
   console.log(isPopupOpen);
 
   return (
-    <Main isOpen={isPopupOpen}>
+    <Main>
       <Header />
 
       <AppState />
