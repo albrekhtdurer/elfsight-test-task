@@ -1,3 +1,4 @@
+import { useCallback, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { PopupEpisodes } from './PopupEpisodes';
 import { PopupHeader } from './PopupHeader';
@@ -18,14 +19,30 @@ export function Popup({ content = {} }) {
     episode: episodes
   } = content;
 
+  const onPopupClose = useCallback(() => {
+    setIsPopupOpen(false);
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = 0;
+  }, [setIsPopupOpen]);
+
   function togglePopup(e) {
     if (e.currentTarget !== e.target) {
       return;
     }
-    setIsPopupOpen(false);
-    document.body.style.overflow = '';
-    document.body.style.paddingRight = 0;
+    onPopupClose();
   }
+
+  useEffect(() => {
+    const handleEsc = (e) => {
+      e.key === 'Escape' && onPopupClose();
+    };
+
+    document.addEventListener('keydown', handleEsc);
+
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+    };
+  }, [onPopupClose]);
 
   return (
     <PopupContainer visible={isPopupOpen}>
