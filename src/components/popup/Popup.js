@@ -45,7 +45,7 @@ export function Popup({ content = {} }) {
   }, [onPopupClose]);
 
   return (
-    <PopupContainer visible={isPopupOpen}>
+    <PopupContainer visible={isPopupOpen} onClick={togglePopup}>
       <StyledPopup>
         <CloseIcon onClick={togglePopup} />
 
