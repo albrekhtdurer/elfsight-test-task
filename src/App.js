@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import { Pagination, ItemsGrid, useData, Header, AppState } from './components';
 
 export function App() {
-  const { isFetching, isError } = useData();
+  const { isFetching, isError, isPopupOpen } = useData();
+  console.log(isPopupOpen);
 
   return (
-    <Main>
+    <Main isOpen={isPopupOpen}>
       <Header />
 
       <AppState />

@@ -2,8 +2,10 @@ import styled, { css } from 'styled-components';
 import { PopupEpisodes } from './PopupEpisodes';
 import { PopupHeader } from './PopupHeader';
 import { PopupInfo } from './PopupInfo';
+import { useData } from '../providers';
 
-export function Popup({ settings: { visible, content = {} }, setSettings }) {
+export function Popup({ content = {} }) {
+  const { isPopupOpen, setIsPopupOpen } = useData();
   const {
     name,
     gender,
@@ -20,15 +22,13 @@ export function Popup({ settings: { visible, content = {} }, setSettings }) {
     if (e.currentTarget !== e.target) {
       return;
     }
-
-    setSettings((prevState) => ({
-      ...prevState,
-      visible: !prevState.visible
-    }));
+    setIsPopupOpen(false);
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = 0;
   }
 
   return (
-    <PopupContainer visible={visible}>
+    <PopupContainer visible={isPopupOpen}>
       <StyledPopup>
         <CloseIcon onClick={togglePopup} />
 

@@ -17,10 +17,12 @@ export function DataProvider({ children }) {
   const [isError, setIsError] = useState(false);
   const [info, setInfo] = useState({});
   const [apiURL, setApiURL] = useState(API_URL);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const fetchData = useCallback(async (url) => {
     setIsFetching(true);
     setIsError(false);
+    setIsPopupOpen(false);
 
     axios
       .get(url)
@@ -50,9 +52,21 @@ export function DataProvider({ children }) {
       fetchData,
       isFetching,
       isError,
-      info
+      info,
+      isPopupOpen,
+      setIsPopupOpen
     }),
-    [activePage, apiURL, characters, isFetching, isError, info, fetchData]
+    [
+      activePage,
+      apiURL,
+      characters,
+      isFetching,
+      isError,
+      info,
+      isPopupOpen,
+      setIsPopupOpen,
+      fetchData
+    ]
   );
 
   return (

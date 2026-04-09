@@ -4,20 +4,19 @@ import { Popup } from './popup';
 import { useData } from './providers';
 import { Card } from './Card';
 
-const defaultPopupSettings = {
-  visible: false,
+const defaultPopupContent = {
   content: {}
 };
 
 export function ItemsGrid() {
-  const { characters } = useData();
-  const [popupSettings, setPopupSettings] = useState(defaultPopupSettings);
+  const { characters, setIsPopupOpen } = useData();
+  const [popupContent, setPopupContent] = useState(defaultPopupContent);
 
   function cardOnClickHandler(props) {
-    setPopupSettings({
-      visible: true,
-      content: { ...props }
-    });
+    setIsPopupOpen(true);
+    setPopupContent(props);
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = '15px';
   }
 
   if (!characters.length) {
@@ -34,7 +33,7 @@ export function ItemsGrid() {
         />
       ))}
 
-      <Popup settings={popupSettings} setSettings={setPopupSettings} />
+      <Popup content={popupContent} />
     </Container>
   );
 }
