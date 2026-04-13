@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Logo } from './Logo';
-import { Dropdown } from '../common/Dropdown';
+import { Dropdown } from '../common/Dropdown/Dropdown';
 
 export function Header() {
   const ddOptions = [

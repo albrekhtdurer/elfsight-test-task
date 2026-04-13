@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { useOutsideClick } from '../../utils/useOutsideClick';
+import { useOutsideClick } from '../../../utils/useOutsideClick';
+import { DropdownButton } from './DropdownButton';
 
 export function Dropdown({ options, placeholder }) {
   const listContainerRef = useOutsideClick(() => setIsOpen(false));
@@ -19,9 +20,16 @@ export function Dropdown({ options, placeholder }) {
 
   return (
     <DropdownContainer>
-      <DropdownPlaceholder onClick={onPlaceholderClicked}>
-        {selectedOption || placeholder}
-      </DropdownPlaceholder>
+      <DropdownHeader onClick={onPlaceholderClicked}>
+        <DropdownPlaceholder>
+          {selectedOption || placeholder}
+        </DropdownPlaceholder>
+        <DropdownButton
+          isOpen={isOpen}
+          hasValue={selectedOption}
+          onClick={() => console.log('cliccko')}
+        ></DropdownButton>
+      </DropdownHeader>
       {isOpen && (
         <DropdownListContainer ref={listContainerRef}>
           <DropdownList>
@@ -49,13 +57,18 @@ const DropdownContainer = styled.div`
   min-width: 180px;
 `;
 
-const DropdownPlaceholder = styled.div`
+const DropdownHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
   padding: 12px 16px;
   border: 1px solid #83bf46;
   border-radius: 8px;
+  background-color: #263750;
+`;
+
+const DropdownPlaceholder = styled.span`
   color: ${({ selectedOption }) => (selectedOption ? '#f5f5f5' : '#b3b3b3')};
   font-size: 16px;
-  background-color: #263750;
 `;
 
 const DropdownListContainer = styled.div``;
