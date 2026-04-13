@@ -16,7 +16,7 @@ export function TextInput({ value, label, name, placeholder, onChange }) {
 const StyledTextInput = styled.input`
   max-width: 180px;
   border: 1px solid #83bf46;
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 12px 16px;
   overflow: hidden;
   color: ${({ value }) => (value ? '#f5f5f5' : '#b3b3b3')};
