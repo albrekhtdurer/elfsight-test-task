@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useOutsideClick } from '../../../utils/useOutsideClick';
-import { DropdownButton } from './DropdownButton';
+import { DropdownClearButton } from './DropdownClearButton';
+import { DropdownOpenButton } from './DropdownOpenButton';
 
 export function Dropdown({ options, placeholder }) {
   const listContainerRef = useOutsideClick(() => setIsOpen(false));
@@ -18,17 +19,24 @@ export function Dropdown({ options, placeholder }) {
     setIsOpen(false);
   };
 
+  const onClearButtonClicked = (e) => {
+    e.stopPropagation();
+    setSelectedOption(null);
+  };
+
   return (
     <DropdownContainer>
       <DropdownHeader onClick={onPlaceholderClicked}>
         <DropdownPlaceholder>
           {selectedOption || placeholder}
         </DropdownPlaceholder>
-        <DropdownButton
-          isOpen={isOpen}
-          hasValue={selectedOption}
-          onClick={() => console.log('cliccko')}
-        ></DropdownButton>
+        {(!selectedOption && (
+          <DropdownOpenButton isOpen={isOpen}></DropdownOpenButton>
+        )) || (
+          <DropdownClearButton
+            onClick={onClearButtonClicked}
+          ></DropdownClearButton>
+        )}
       </DropdownHeader>
       {isOpen && (
         <DropdownListContainer ref={listContainerRef}>
