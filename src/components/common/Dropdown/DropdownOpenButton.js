@@ -3,7 +3,7 @@ import { ReactComponent as Chevron } from '../../../assets/icons/chevron_up.svg'
 
 export function DropdownOpenButton({ isOpen }) {
   return (
-    <StyledDropdownOpenButton isOpen={isOpen}>
+    <StyledDropdownOpenButton isOpen={isOpen} type="button">
       <Chevron
         width={15}
         height={15}

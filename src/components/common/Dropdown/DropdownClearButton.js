@@ -3,7 +3,7 @@ import { ReactComponent as Cross } from '../../../assets/icons/cross.svg';
 
 export function DropdownClearButton({ onClick }) {
   return (
-    <StyledDropdownClearButton onClick={onClick}>
+    <StyledDropdownClearButton onClick={onClick} type="button">
       <Cross
         width={15}
         height={15}
