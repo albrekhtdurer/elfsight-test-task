@@ -62,7 +62,15 @@ const MAX_LIST_ELEMS = 5;
 
 const DropdownContainer = styled.div`
   position: relative;
-  min-width: 180px;
+  max-width: 180px;
+
+  @media (max-width: 930px) {
+    max-width: 150px;
+  }
+
+  @media (max-width: 600px) {
+    max-width: 240px;
+  }
 `;
 
 const DropdownHeader = styled.div`

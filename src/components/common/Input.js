@@ -1,12 +1,20 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
-export function TextInput({ value, label, name, placeholder, onChange }) {
+export function TextInput({ name, onChangeCallback }) {
+  const [value, setValue] = useState('');
+  const capitalizedName = name[0].toUpperCase() + name.slice(1);
+  const onChange = (e) => {
+    setValue(e.target.value);
+    onChangeCallback();
+  };
+
   return (
     <StyledTextInput
       value={value}
-      label={label}
+      label={name}
       name={name}
-      placeholder={placeholder}
+      placeholder={capitalizedName}
       onChange={onChange}
       type="text"
     ></StyledTextInput>
@@ -14,7 +22,6 @@ export function TextInput({ value, label, name, placeholder, onChange }) {
 }
 
 const StyledTextInput = styled.input`
-  max-width: 180px;
   border: 1px solid #83bf46;
   border-radius: 8px;
   padding: 12px 16px;
@@ -24,4 +31,13 @@ const StyledTextInput = styled.input`
   text-overflow: ellipsis;
   background-color: #263750;
   white-space: nowrap;
+  max-width: 180px;
+
+  @media (max-width: 930px) {
+    max-width: 150px;
+  }
+
+  @media (max-width: 600px) {
+    max-width: 240px;
+  }
 `;
