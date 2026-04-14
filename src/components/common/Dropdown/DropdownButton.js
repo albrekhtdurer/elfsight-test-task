@@ -7,8 +7,8 @@ export function DropdownButton({ isOpen, hasValue, onClick }) {
     if (hasValue) {
       return (
         <Cross
-          width={20}
-          height={20}
+          width={15}
+          height={15}
           stroke="currentColor"
           fill="transparent"
           title="Remove"
@@ -18,8 +18,8 @@ export function DropdownButton({ isOpen, hasValue, onClick }) {
 
     return (
       <Chevron
-        width={10}
-        height={10}
+        width={15}
+        height={15}
         stroke="currentColor"
         fill="transparent"
         title="Open"
