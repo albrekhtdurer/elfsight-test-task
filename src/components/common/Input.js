@@ -4,8 +4,8 @@ import styled from 'styled-components';
 export function TextInput({ name, onChangeCallback }) {
   const [value, setValue] = useState('');
   const capitalizedName = name[0].toUpperCase() + name.slice(1);
-  const onChange = (e) => {
-    setValue(e.target.value);
+  const onChange = (event) => {
+    setValue(event.target.value);
     onChangeCallback();
   };
 

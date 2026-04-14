@@ -9,8 +9,8 @@ import {
 } from '../../../constants/constants';
 
 export function Form() {
-  const onChangeInputs = (e) => {
-    console.log(e.target.value);
+  const onChangeInputs = () => {
+    console.log('input');
   };
 
   return (
