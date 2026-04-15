@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useOutsideClick } from '../../../utils/useOutsideClick';
 import { DropdownClearButton } from './DropdownClearButton';
 import { DropdownOpenButton } from './DropdownOpenButton';
@@ -11,10 +11,13 @@ export function Dropdown({ options, name, value }) {
   const { formData, setFormData } = useFormData();
   const placeholder = name[0].toUpperCase() + name.slice(1);
 
-  const onPlaceholderClicked = (e) => {
-    e.stopPropagation();
-    setIsOpen(!isOpen);
-  };
+  const onPlaceholderClicked = useCallback(
+    (e) => {
+      e.stopPropagation();
+      setIsOpen(!isOpen);
+    },
+    [isOpen]
+  );
 
   const onOptionClicked = (value) => () => {
     setFormData({
@@ -24,13 +27,16 @@ export function Dropdown({ options, name, value }) {
     setIsOpen(false);
   };
 
-  const onClearButtonClicked = (e) => {
-    e.stopPropagation();
-    setFormData({
-      ...formData,
-      [name]: null
-    });
-  };
+  const onClearButtonClicked = useCallback(
+    (e) => {
+      e.stopPropagation();
+      setFormData({
+        ...formData,
+        [name]: null
+      });
+    },
+    [formData, name, setFormData]
+  );
 
   return (
     <DropdownContainer>
