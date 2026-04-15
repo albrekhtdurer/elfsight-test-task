@@ -2,12 +2,10 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useFormData } from '../providers/FormProvider';
 
-export function TextInput({ name }) {
-  const [value, setValue] = useState('');
+export function TextInput({ name, value }) {
   const capitalizedName = name[0].toUpperCase() + name.slice(1);
   const { formData, setFormData } = useFormData();
   const onChange = (event) => {
-    setValue(event.target.value);
     setFormData({
       ...formData,
       [name]: event.target.value

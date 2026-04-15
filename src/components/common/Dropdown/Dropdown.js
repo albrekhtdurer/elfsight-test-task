@@ -5,10 +5,9 @@ import { DropdownClearButton } from './DropdownClearButton';
 import { DropdownOpenButton } from './DropdownOpenButton';
 import { useFormData } from '../../providers/FormProvider';
 
-export function Dropdown({ options, name }) {
+export function Dropdown({ options, name, value }) {
   const listContainerRef = useOutsideClick(() => setIsOpen(false));
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
   const { formData, setFormData } = useFormData();
   const placeholder = name[0].toUpperCase() + name.slice(1);
 
@@ -18,7 +17,6 @@ export function Dropdown({ options, name }) {
   };
 
   const onOptionClicked = (value) => () => {
-    setSelectedOption(value);
     setFormData({
       ...formData,
       [name]: value
@@ -28,7 +26,6 @@ export function Dropdown({ options, name }) {
 
   const onClearButtonClicked = (e) => {
     e.stopPropagation();
-    setSelectedOption(null);
     setFormData({
       ...formData,
       [name]: null
@@ -38,10 +35,8 @@ export function Dropdown({ options, name }) {
   return (
     <DropdownContainer>
       <DropdownHeader onClick={onPlaceholderClicked}>
-        <DropdownPlaceholder>
-          {selectedOption || placeholder}
-        </DropdownPlaceholder>
-        {(!selectedOption && (
+        <DropdownPlaceholder>{value || placeholder}</DropdownPlaceholder>
+        {(!value && (
           <DropdownOpenButton isOpen={isOpen}></DropdownOpenButton>
         )) || (
           <DropdownClearButton
@@ -56,7 +51,7 @@ export function Dropdown({ options, name }) {
               <ListItem
                 onClick={onOptionClicked(option)}
                 key={option}
-                isSelected={option === selectedOption}
+                isSelected={option === value}
               >
                 {option}
               </ListItem>

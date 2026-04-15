@@ -8,7 +8,7 @@ import {
   useCallback
 } from 'react';
 
-const API_URL = 'https://rickandmortyapi.com/api/character/';
+import { API_URL } from '../../constants/constants';
 
 export function DataProvider({ children }) {
   const [activePage, setActivePage] = useState(0);

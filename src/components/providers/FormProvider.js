@@ -2,11 +2,11 @@ import { createContext, useContext, useMemo, useState } from 'react';
 
 export function FormDataProvider({ children }) {
   const [formData, setFormData] = useState({
-    gender: null,
-    status: null,
-    species: null,
-    type: null,
-    name: null
+    gender: '',
+    status: '',
+    species: '',
+    type: '',
+    name: ''
   });
 
   const formDataValue = useMemo(
