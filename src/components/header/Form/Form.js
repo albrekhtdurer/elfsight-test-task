@@ -10,37 +10,44 @@ import {
 } from '../../../constants/constants';
 import { useFormData } from '../../providers/FormProvider';
 import { useData } from '../../providers/DataProvider';
+import { useCallback } from 'react';
 
 export function Form() {
   const { formData, setFormData } = useFormData();
   const { setApiURL, setActivePage } = useData();
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    let currentApiUrl = API_URL;
-    for (const [key, value] of Object.entries(formData)) {
-      if (value) {
-        currentApiUrl =
-          currentApiUrl === API_URL
-            ? currentApiUrl + `?${key}=${value}`
-            : currentApiUrl + `&${key}=${value}`;
+  const onSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      let currentApiUrl = API_URL;
+      for (const [key, value] of Object.entries(formData)) {
+        if (value) {
+          currentApiUrl =
+            currentApiUrl === API_URL
+              ? currentApiUrl + `?${key}=${value}`
+              : currentApiUrl + `&${key}=${value}`;
+        }
       }
-    }
-    setApiURL(currentApiUrl);
-  };
+      setApiURL(currentApiUrl);
+    },
+    [formData, setApiURL]
+  );
 
-  const onReset = (event) => {
-    event.preventDefault();
-    setFormData({
-      gender: '',
-      status: '',
-      species: '',
-      type: '',
-      name: ''
-    });
-    setActivePage(0);
-    setApiURL(API_URL);
-  };
+  const onReset = useCallback(
+    (event) => {
+      event.preventDefault();
+      setFormData({
+        gender: '',
+        status: '',
+        species: '',
+        type: '',
+        name: ''
+      });
+      setActivePage(0);
+      setApiURL(API_URL);
+    },
+    [setActivePage, setApiURL, setFormData]
+  );
 
   return (
     <StyledForm onSubmit={onSubmit} onReset={onReset}>
