@@ -25,12 +25,15 @@ export function Popup({ content = {} }) {
     document.body.style.paddingRight = 0;
   }, [setIsPopupOpen]);
 
-  function togglePopup(event) {
-    if (event.currentTarget !== event.target) {
-      return;
-    }
-    onPopupClose();
-  }
+  const togglePopup = useCallback(
+    (event) => {
+      if (event.currentTarget !== event.target) {
+        return;
+      }
+      onPopupClose();
+    },
+    [onPopupClose]
+  );
 
   useEffect(() => {
     const handleEsc = (event) => {
