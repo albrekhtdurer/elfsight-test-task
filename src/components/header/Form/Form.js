@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Dropdown } from '../../common/Dropdown/Dropdown';
-import { TextInput } from '../../common/Input';
+import { TextInput } from '../../common/TextInput';
 import { FormButton } from './FormButton';
 import {
   GENDER_OPTIONS,
