@@ -3,11 +3,14 @@ import { useState } from 'react';
 import { useOutsideClick } from '../../../utils/useOutsideClick';
 import { DropdownClearButton } from './DropdownClearButton';
 import { DropdownOpenButton } from './DropdownOpenButton';
+import { useFormData } from '../../providers/FormProvider';
 
-export function Dropdown({ options, placeholder }) {
+export function Dropdown({ options, name }) {
   const listContainerRef = useOutsideClick(() => setIsOpen(false));
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const { formData, setFormData } = useFormData();
+  const placeholder = name[0].toUpperCase() + name.slice(1);
 
   const onPlaceholderClicked = (e) => {
     e.stopPropagation();
@@ -16,12 +19,20 @@ export function Dropdown({ options, placeholder }) {
 
   const onOptionClicked = (value) => () => {
     setSelectedOption(value);
+    setFormData({
+      ...formData,
+      [name]: value
+    });
     setIsOpen(false);
   };
 
   const onClearButtonClicked = (e) => {
     e.stopPropagation();
     setSelectedOption(null);
+    setFormData({
+      ...formData,
+      [name]: null
+    });
   };
 
   return (

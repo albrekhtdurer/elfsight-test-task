@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import { Logo } from './Logo';
 import { Form } from './Form/Form';
+import { FormDataProvider } from '../providers/FormProvider';
 
 export function Header() {
   return (
     <HeaderContainer>
       <Logo />
-      <Form />
+      <FormDataProvider>
+        <Form />
+      </FormDataProvider>
     </HeaderContainer>
   );
 }

@@ -8,22 +8,10 @@ import {
   SPECIES_OPTIONS,
   STATUS_OPTIONS
 } from '../../../constants/constants';
+import { useFormData } from '../../providers/FormProvider';
 
 export function Form() {
-  const [formData, setFormData] = useState({
-    name: null,
-    type: null,
-    status: null,
-    species: null,
-    gender: null
-  });
-
-  const onChangeInputs = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value
-    });
-  };
+  const { formData } = useFormData();
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -32,11 +20,11 @@ export function Form() {
 
   return (
     <StyledForm onSubmit={formSubmitHandler}>
-      <Dropdown options={STATUS_OPTIONS} placeholder="Status" />
-      <Dropdown options={GENDER_OPTIONS} placeholder="Gender" />
-      <Dropdown options={SPECIES_OPTIONS} placeholder="Species" />
-      <TextInput name="name" onChangeCallback={onChangeInputs} />
-      <TextInput name="type" onChangeCallback={onChangeInputs} />
+      <Dropdown options={STATUS_OPTIONS} name="status" />
+      <Dropdown options={GENDER_OPTIONS} name="gender" />
+      <Dropdown options={SPECIES_OPTIONS} name="species" />
+      <TextInput name="name" />
+      <TextInput name="type" />
       <ButtonsContainer>
         <FormButton type="submit" />
         <FormButton type="reset" />
