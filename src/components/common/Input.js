@@ -6,7 +6,7 @@ export function TextInput({ name, onChangeCallback }) {
   const capitalizedName = name[0].toUpperCase() + name.slice(1);
   const onChange = (event) => {
     setValue(event.target.value);
-    onChangeCallback();
+    onChangeCallback(event);
   };
 
   return (

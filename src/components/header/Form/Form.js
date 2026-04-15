@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import { Dropdown } from '../../common/Dropdown/Dropdown';
 import { TextInput } from '../../common/Input';
 import { FormButton } from './FormButton';
@@ -9,12 +10,28 @@ import {
 } from '../../../constants/constants';
 
 export function Form() {
-  const onChangeInputs = () => {
-    console.log('input');
+  const [formData, setFormData] = useState({
+    name: null,
+    type: null,
+    status: null,
+    species: null,
+    gender: null
+  });
+
+  const onChangeInputs = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value
+    });
+  };
+
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    console.log(formData);
   };
 
   return (
-    <StyledForm>
+    <StyledForm onSubmit={formSubmitHandler}>
       <Dropdown options={STATUS_OPTIONS} placeholder="Status" />
       <Dropdown options={GENDER_OPTIONS} placeholder="Gender" />
       <Dropdown options={SPECIES_OPTIONS} placeholder="Species" />
