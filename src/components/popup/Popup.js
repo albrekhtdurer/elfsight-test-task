@@ -25,16 +25,16 @@ export function Popup({ content = {} }) {
     document.body.style.paddingRight = 0;
   }, [setIsPopupOpen]);
 
-  function togglePopup(e) {
-    if (e.currentTarget !== e.target) {
+  function togglePopup(event) {
+    if (event.currentTarget !== event.target) {
       return;
     }
     onPopupClose();
   }
 
   useEffect(() => {
-    const handleEsc = (e) => {
-      e.key === 'Escape' && onPopupClose();
+    const handleEsc = (event) => {
+      event.key === 'Escape' && onPopupClose();
     };
 
     document.addEventListener('keydown', handleEsc);

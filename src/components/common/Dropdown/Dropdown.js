@@ -12,8 +12,8 @@ export function Dropdown({ options, name, value }) {
   const placeholder = name[0].toUpperCase() + name.slice(1);
 
   const onPlaceholderClicked = useCallback(
-    (e) => {
-      e.stopPropagation();
+    (event) => {
+      event.stopPropagation();
       setIsOpen(!isOpen);
     },
     [isOpen]
@@ -28,8 +28,8 @@ export function Dropdown({ options, name, value }) {
   };
 
   const onClearButtonClicked = useCallback(
-    (e) => {
-      e.stopPropagation();
+    (event) => {
+      event.stopPropagation();
       setFormData({
         ...formData,
         [name]: null
