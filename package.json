@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "https://github.com/albrekhtdurer/elfsight-test-task.git",
+  "homepage": "https://albrekhtdurer.github.io/elfsight-test-task/",
   "scripts": {
     "predeploy": "npm run build",
     "start": "react-app-rewired start",
